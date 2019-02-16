@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import logo from './resources/images/logo.svg';
 import './resources/App.css';
-import Home from './Home.js';
+import Home from './components/Home.js';
 import { Button } from 'react-bootstrap';
 
 class App extends Component {
