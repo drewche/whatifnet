@@ -11,9 +11,9 @@ class App extends Component {
   render() {
     
     return (
-      <div className>
-        <Home message="Hello World!!!"
-              color="blue"/>
+      <div className="fullscreen">
+        <Home message="What if... global warming was at your doorstep?"
+              color="black"/>
         <Home message="Bye!"
               color="red"/>
         <Button variant="secondary">Secondary</Button>
