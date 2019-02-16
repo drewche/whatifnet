@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import { loadModules } from 'esri-loader';
 import { loadCss } from 'esri-loader';
 import '../resources/ArcMap.css';
@@ -43,9 +43,9 @@ class Map extends Component {
           event.stopPropagation();
         });
 
-        view.on("double-click", function(event){
-          event.stopPropagation();
-        });
+        // view.on("double-click", function(event){
+        //   event.stopPropagation();
+        // });
 
         view.on("double-click", ["Control"], function(event){
           event.stopPropagation();
@@ -92,10 +92,20 @@ class Map extends Component {
   render() {
     return (
       <div className="map-component-container">
+        <div className="input-container">
+          <div className="message-text">
+          </div>
+          <Form>
+            <Form.Group controlId="formGridAddress1">
+              <Form.Label className="form-text">ENTER YOUR ADDRESS OR ZIPCODE.</Form.Label>
+              <Form.Control className="form-input" placeholder="1234 Main St" />
+            </Form.Group>
+            <Button type="submit" className="execute" variant="dark">Execute</Button>
+          </Form>
+        </div>
         <div className="map-container">
           <div id="myGIS" className="arcgis-map"></div>
-        </div>  
-        <Button className="select" variant="dark">Grab Information</Button>
+        </div> 
       </div>
     );
   }

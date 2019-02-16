@@ -1,6 +1,6 @@
 .map-component-container {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   height: 100vh;
@@ -26,6 +26,26 @@
 	width: 400px;
 }
 
-.select {
+.form-text {
+	font-size: 30px;
+	font-family: 'Inconsolata', monospace;
+	color: white;
+}
+
+.form-input {
+	font-size: 30px;
+	font-family: 'Inconsolata', monospace;
+	color: white;
+}
+
+.execute {
 	margin-bottom: 5%;
+	width: 100%;
+	font-size: 30px;
+	color: white;
+}
+
+.execute:hover {
+	cursor: pointer;
+	color: red;
 }
