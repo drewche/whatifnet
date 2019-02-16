@@ -1,0 +1,30 @@
+.map-component-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  background-color: white; 
+}
+
+.map-container {
+	width: 50%;
+	height: 80%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-top: 5%;
+	padding-bottom: 5%;
+}
+
+.arcgis-map {
+	display: flex;
+	padding: 0;
+	height: 400px;
+	width: 400px;
+}
+
+.select {
+	margin-bottom: 5%;
+}
