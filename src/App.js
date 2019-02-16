@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import logo from './resources/images/logo.svg';
-import './resources/styles/App.css';
+import './resources/App.css';
 import Home from './Home.js';
 import { Button } from 'react-bootstrap';
 
