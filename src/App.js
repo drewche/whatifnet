@@ -24,10 +24,10 @@ class App extends Component {
   render() {
     return (
       <div className="fullscreen">
-        <Home onClick={this.handleOnClick} message="What if... global warming was at your doorstep?"
+        <Home onclick={this.scrollToContent} message="What if... global warming was at your doorstep?"
               color="black"/>
-        <ArcMap  ref={this.myRef} />
-        <Results />
+        <ArcMap ref={this.section1} />
+        <Results ref={this.section2} />
       </div>
     );
   }

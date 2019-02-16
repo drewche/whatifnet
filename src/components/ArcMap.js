@@ -23,6 +23,41 @@ class Map extends Component {
           center: [-118.71511,34.09042],
           zoom: 16,
           container: 'myGIS',
+          constraints: {
+            rotationEnabled: false
+          },
+          ui: {
+            components: [ "attribution" ]
+          }
+        });
+
+        view.on("key-down", function(event){
+          var prohibitedKeys = [ "+", "-", "Shift", "_", "=" ];
+          var keyPressed = event.key;
+          if(prohibitedKeys.indexOf(keyPressed) !== -1){
+            event.stopPropagation();
+          }
+        });
+
+        view.on("mouse-wheel", function(event){
+          event.stopPropagation();
+        });
+
+        view.on("double-click", function(event){
+          event.stopPropagation();
+        });
+
+        view.on("double-click", ["Control"], function(event){
+          event.stopPropagation();
+        });
+
+
+        view.on("drag", ["Shift"], function(event){
+          event.stopPropagation();
+        });
+
+        view.on("drag", ["Shift", "Control"], function(event){
+          event.stopPropagation();
         });
 
         //*** Add div element to show coordates ***//
