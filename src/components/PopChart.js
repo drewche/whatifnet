@@ -24,7 +24,7 @@ class PopChart extends Component {
 		      	}
 		      },
 		      fill: {
-		      	colors: ['#f44336']
+		      	colors: ['#f44336', '#f21234']
 		      },
 		      title: {
 		      	text: 'Largest US Cities By Population',
@@ -39,8 +39,12 @@ class PopChart extends Component {
 	      },
 	      series: [
 	        {
-	          name: "series-1",
-	          data: [30, 40, 45, 50, 49, 60, 70, 91]
+	          name: "series",
+	          data: [30, 40, 45, 50, 49, 60, 70, 91],
+	        },
+	        {
+	          name: "seriess",
+	          data: [30, 100, 432, 350, 49, 60, 70, 91]
 	        }
 	      ]
 	    };
@@ -62,7 +66,7 @@ class PopChart extends Component {
 
 	render() {
 		return (
-			<div className="line-graph-component-container">
+			<div className="pop-graph-component-container">
 				<div id="chart">
 					
 					<Chart

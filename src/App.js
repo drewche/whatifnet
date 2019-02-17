@@ -3,7 +3,7 @@ import './resources/App.css';
 import Home from './components/Home.js';
 import ArcMap from './components/ArcMap.js';
 import Results from './components/Results.js';
-import PopChart from './components/PopChart.js';
+import Dashboard from './components/Dashboard.js';
 
 class App extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class App extends Component {
         <Home message="What if... global warming was at your doorstep?"
               color="black"/>
         <ArcMap /> 
-        <PopChart /> 
+        <Dashboard />       
         <Results />
       </div>
     );
