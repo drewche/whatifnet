@@ -28,7 +28,7 @@ class Map extends Component {
         const view = new MapView({
           map: map,
           center: [-118.71511,34.09042],
-          zoom: 16,
+          zoom: 18,
           container: 'myGIS',
           constraints: {
             rotationEnabled: false
@@ -58,7 +58,7 @@ class Map extends Component {
 
         
         searchWidget.on("select-result", (e) => {
-          view.zoom = 16;
+          view.zoom = 18;
           let long = e.result.feature.geometry.longitude;
           let lat = e.result.feature.geometry.latitude;
           view.center = [long, lat];
