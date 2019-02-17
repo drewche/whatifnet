@@ -8,7 +8,13 @@ import '../resources/ArcMap.css';
 class Map extends Component {
   constructor(props) {
       super(props);
+      this.state = {
+        binary: '',
+        image: ''
+      }
   }
+
+
   componentDidMount() {
     loadCss('https://js.arcgis.com/4.10/esri/css/main.css');
 
@@ -50,30 +56,30 @@ class Map extends Component {
           
         //});
 
-        searchWidget.on("select-result", function(e){
+        
+        searchWidget.on("select-result", (e) => {
           view.zoom = 16;
           let long = e.result.feature.geometry.longitude;
           let lat = e.result.feature.geometry.latitude;
           view.center = [long, lat];
           console.log("Latitude: " + lat);
           console.log("Longitude: " + long);
-          execute(lat, long);
-        });
-
-        function execute(lat, long) {
           fetch('http://35.235.84.213:3000/model', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'no-cors'
             },
             body: JSON.stringify({ 
               "lat": lat,
               "long": long
             })
-          }).then(res => res.json())
-            .then(response => console.log(response))
-            .catch(error => console.log('Error: '+ error));  
-        }
+          }).then(res => res.text()).then(text => {
+            console.log('data:image/png;base64,' + text);
+            this.setState({ image: 'data:image/png;base64,' + text });
+          })
+        });
+          
 
         view.on("key-down", function(event){
           var prohibitedKeys = [ "+", "-", "Shift", "_", "=" ];
@@ -194,7 +200,7 @@ class Map extends Component {
               }
           }} />
         <div id="inputContainer" className="input-container"> 
-          <div className="message-text">Explore climate data from over 20 years ago.</div>
+          <div className="message-text">Enter your address, find your home, and see the future if we do not act now.</div>
           <div className="bottom"> 
             <div id="searchContainer" name="search-container"></div>
             <Button className="applyFilter" variant="flat">What if...</Button>
@@ -204,7 +210,7 @@ class Map extends Component {
           <div className="map-container">
             <div id="myGIS" className="arcgis-map"></div>
           </div>
-          <div className="after-pic"></div>
+          <img className="myImage" src={this.state.image}/>
         </div>
       </div>
     );

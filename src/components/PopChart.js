@@ -175,22 +175,24 @@ class PopChart extends Component {
 					        }
 					    }
 					}} />
-				<div id="chart">
-					
-					<Chart
-		              options={this.state.options}
-		              series={this.state.series}
-		              title={this.state.title}
-		              type="bar"
-		              width="100%"
-		              height="450"
-		            />
-	
-				</div>
-			</div>
-		);
-	}
+				<div className="p1">The Climate Extremes Index measures the percentage within the United States with abnormal weather conditions including severe draughts and extreme precipitation events.</div>
+                <div id="chart">
+                    
+                    <Chart
+                      options={this.state.options}
+                      series={this.state.series}
+                      title={this.state.title}
+                      type="bar"
+                      width="100%"
+                      height="450"
+                    />
+    
+                </div>
+                <div className="p1">The west coast alone has seen a climb in extreme climate conditions.</div>
+
+            </div>
+        );
+    }
 }
 
 export default PopChart;
-

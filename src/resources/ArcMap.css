@@ -42,6 +42,7 @@
 	text-align: center;
 	height: 30%;
 	width: 100%;
+	margin-bottom: 5%;
 }
 
 .message-text {
@@ -92,7 +93,7 @@
 	height: 70%;
 }
 
-.after-pic {
+.myImage {
 	width: 400px;
 	height: 400px;
 	background-color: black;

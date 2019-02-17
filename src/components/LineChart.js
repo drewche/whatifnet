@@ -169,23 +169,29 @@ class LineChart extends Component {
                   }
               }
           }} />
-				<div id="chart">
-					
-					<Chart
-		              options={this.state.options}
-		              series={this.state.series}
-		              title={this.state.title}
-		              subtitle={this.state.subtitle}
-		              type="area"
-		              width="100%"
-		              height="450"
-		            />
-					
-				</div>
-			</div>
-		);
-	}
+				
+
+<div className="p1">Not only is the climate changing, global warming has become prevalent.</div>
+
+                <div id="chart">
+                    
+                    <Chart
+                      options={this.state.options}
+                      series={this.state.series}
+                      title={this.state.title}
+                      subtitle={this.state.subtitle}
+                      type="area"
+                      width="100%"
+                      height="450"
+                    />
+                    
+                </div>
+                
+                <div className="p1">Hover to see how San Francisco’s temperature has been rising since 1948.</div>
+                
+            </div>
+        );
+    }
 }
 
 export default LineChart;
-
