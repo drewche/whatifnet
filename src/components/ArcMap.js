@@ -52,22 +52,28 @@ class Map extends Component {
 
         searchWidget.on("select-result", function(e){
           view.zoom = 16;
-          view.center = [e.result.feature.geometry.longitude, e.result.feature.geometry.latitude];
-          console.log("Latitude: " + e.result.feature.geometry.latitude);
-          console.log("Longitude: " + e.result.feature.geometry.longitude);
+          let long = e.result.feature.geometry.longitude;
+          let lat = e.result.feature.geometry.latitude;
+          view.center = [long, lat];
+          console.log("Latitude: " + lat);
+          console.log("Longitude: " + long);
+          execute(lat, long);
+        });
+
+        function execute(lat, long) {
           fetch('http://35.235.84.213:3000/model', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
             body: JSON.stringify({ 
-              "lat": e.result.feature.geometry.latitude,
-              "long": e.result.feature.geometry.longitude
+              "lat": lat,
+              "long": long
             })
           }).then(res => res.json())
             .then(response => console.log(response))
             .catch(error => console.log('Error: '+ error));  
-        });
+        }
 
         view.on("key-down", function(event){
           var prohibitedKeys = [ "+", "-", "Shift", "_", "=" ];
@@ -189,7 +195,10 @@ class Map extends Component {
           }} />
         <div id="inputContainer" className="input-container"> 
           <div className="message-text">Explore climate data from over 20 years ago.</div>
-          <div id="searchContainer" name="search-container"></div>
+          <div className="bottom"> 
+            <div id="searchContainer" name="search-container"></div>
+            <Button className="applyFilter" variant="flat">What if...</Button>
+          </div>
         </div>
         <div className="map-container">
           <div id="myGIS" className="arcgis-map"></div>

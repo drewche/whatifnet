@@ -3,6 +3,7 @@ import '../resources/LineChart.css';
 import Chart from "react-apexcharts";
 import Particles from 'react-particles-js';
 
+
 class LineChart extends Component {
 
 	constructor(props) {
@@ -113,62 +114,62 @@ class LineChart extends Component {
 		return (
 			<div className="line-graph-component-container">
 				<Particles 
-					className="particles"
-					params={{
-					    "particles": {
-					        "number": {
-					            "value": 100,
-					            "density": {
-					                "enable": false
-					            }
-					        },
-					        "color": {
-					        	"value": "#ff0000"
-					        },
-					        "size": {
-					            "value": 3,
-					            "random": true,
-					            "anim": {
-					                "speed": 4,
-					                "size_min": 0.3
-					            }
-					        },
-					        "line_linked": {
-					            "enable": true,
-					            "color" : "#ff8c00"
-					        },
-					        "move": {
-					            "random": true,
-					            "speed": 1,
-					            "direction": "top",
-					            "out_mode": "out"
-					        }
-					    },
-					    "interactivity": {
-					        "events": {
-					            "onhover": {
-					                "enable": true,
-					                "mode": "bubble"
-					            },
-					            "onclick": {
-					                "enable": true,
-					                "mode": "repulse"
-					            }
-					        },
-					        "modes": {
-					            "bubble": {
-					                "distance": 250,
-					                "duration": 2,
-					                "size": 0,
-					                "opacity": 0
-					            },
-					            "repulse": {
-					                "distance": 400,
-					                "duration": 4
-					            }
-					        }
-					    }
-					}} />
+          className="particles"
+          params={{
+              "particles": {
+                  "number": {
+                      "value": 100,
+                      "density": {
+                          "enable": false
+                      }
+                  },
+                  "color": {
+                    "value": "#ff0000"
+                  },
+                  "size": {
+                      "value": 3,
+                      "random": true,
+                      "anim": {
+                          "speed": 4,
+                          "size_min": 0.3
+                      }
+                  },
+                  "line_linked": {
+                      "enable": true,
+                      "color" : "#ff8c00"
+                  },
+                  "move": {
+                      "random": true,
+                      "speed": 1,
+                      "direction": "top",
+                      "out_mode": "out"
+                  }
+              },
+              "interactivity": {
+                  "events": {
+                      "onhover": {
+                          "enable": true,
+                          "mode": "bubble"
+                      },
+                      "onclick": {
+                          "enable": true,
+                          "mode": "repulse"
+                      }
+                  },
+                  "modes": {
+                      "bubble": {
+                          "distance": 250,
+                          "duration": 2,
+                          "size": 0,
+                          "opacity": 0
+                      },
+                      "repulse": {
+                          "distance": 400,
+                          "duration": 4
+                      }
+                  }
+              }
+          }} />
 				<div id="chart">
 					
 					<Chart

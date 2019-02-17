@@ -15,9 +15,10 @@ class App extends Component {
       <div className="fullscreen">
         <Home message="What if... global warming was at your doorstep?"
               color="black"/>
-        <ArcMap /> 
-        <Dashboard />       
+        <Dashboard />  
         <Results />
+        <ArcMap />      
+       
       </div>
     );
   }

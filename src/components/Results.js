@@ -12,7 +12,7 @@ class Results extends Component {
 	render() {
 		return (
 			<div className="results-component-container">
-				<div className="message"><Typing><span>Global warming in your neighborhood.</span></Typing></div>
+				<div className="message"><Typing><div>Global warming in your neighborhood.</div><div>Look below to transform your home.</div></Typing></div>
 			</div>
 		);
 	}
