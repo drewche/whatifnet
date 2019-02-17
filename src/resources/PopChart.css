@@ -5,3 +5,10 @@
 	justify-content: center;
 	align-items: center;
 }
+
+#chart {
+  margin: 70px auto;
+  overflow: hidden;
+  width: 100%;
+  text-align: center;
+}
