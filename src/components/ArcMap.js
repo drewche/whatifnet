@@ -55,7 +55,7 @@ class Map extends Component {
           view.center = [e.result.feature.geometry.longitude, e.result.feature.geometry.latitude];
           console.log("Latitude: " + e.result.feature.geometry.latitude);
           console.log("Longitude: " + e.result.feature.geometry.longitude);
-          fetch('https://whatifnet.appspot.com/model', {
+          fetch('http://35.235.84.213:3000/model', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -66,7 +66,7 @@ class Map extends Component {
             })
           }).then(res => res.json())
             .then(response => console.log(response))
-            .catch(error => console.error('Error: ', error));  
+            .catch(error => console.log('Error: '+ error));  
         });
 
         view.on("key-down", function(event){
