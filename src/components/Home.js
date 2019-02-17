@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 // https://www.npmjs.com/package/react-typing-animation
 import Typing from 'react-typing-animation';
-import { Button } from 'react-bootstrap';
 import Particles from 'react-particles-js';
 import '../resources/Home.css';
 
@@ -74,7 +73,7 @@ class Home extends Component {
 					}} />
 
 				<div className="message"><Typing><span>{this.props.message}</span></Typing></div>
-				<Button className="select" variant="dark">Learn More</Button>
+				
 				<i className="fas fa-arrow-down "></i>
 			</div>
 		);
