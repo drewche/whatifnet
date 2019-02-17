@@ -52,6 +52,7 @@ class Map extends Component {
 
         searchWidget.on("select-result", function(e){
           view.zoom = 16;
+          view.center = [e.result.feature.geometry.longitude, e.result.feature.geometry.latitude];
           console.log("Latitude: " + e.result.feature.geometry.latitude);
           console.log("Longitude: " + e.result.feature.geometry.longitude);
           fetch('https://whatifnet.appspot.com/model', {
