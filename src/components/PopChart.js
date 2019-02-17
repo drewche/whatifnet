@@ -16,7 +16,7 @@ class PopChart extends Component {
 	          foreColor: '#333'
 	        },
 	        xaxis: {
-	          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+	          categories: []
 	        },
 	        plotOptions: {
 		      	bar: {
@@ -27,7 +27,7 @@ class PopChart extends Component {
 		      	colors: ['#f44336', '#f21234']
 		      },
 		      title: {
-		      	text: 'Largest US Cities By Population',
+		      	text: '',
 		      	align: 'center',
 		      	margin: 20,
 		      	offsetY: 20,
@@ -40,11 +40,7 @@ class PopChart extends Component {
 	      series: [
 	        {
 	          name: "series",
-	          data: [30, 40, 45, 50, 49, 60, 70, 91],
-	        },
-	        {
-	          name: "seriess",
-	          data: [30, 100, 432, 350, 49, 60, 70, 91]
+	          data: [],
 	        }
 	      ]
 	    };
@@ -69,9 +65,12 @@ class PopChart extends Component {
           		.then(res => res.json())
             	.then(response => {
             		// console.log(this.state.options.title.text);
-            		// console.log(data.data);
+            		console.log(response);
             		let dat = [];
             		let cat = [];
+            		let seriesName = response.description.base_period;
+            		let newSeries = [{ name: seriesName, data: dat }];
+            		
             		for (var key in response.data) {
             			// console.log(data.data[key]);
 					    if (response.data.hasOwnProperty(key)) {
@@ -98,8 +97,10 @@ class PopChart extends Component {
             				}
             			}
             		});
+            		// console.log(newSeries);
             		this.setState({
-            			series: dat
+            			series: newSeries
+
             		});
 					
             	})

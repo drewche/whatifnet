@@ -13,44 +13,85 @@ class LineChart extends Component {
 	          width: "100%",
 	          id: "basic-bar",
 	          background: '#f4f4f4',
-	          foreColor: '#333',
-
+	          foreColor: '#333'
 	        },
 	        xaxis: {
-	          categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+	          categories: []
 	        },
-			fill: {
-				type: 'gradient',
-			    gradient: {
-			      shadeIntensity: 1,
-			      opacityFrom: 0.7,
-			      opacityTo: 0.9,
-			      stops: [0, 90, 100]
-			    }
-			},
-			title: {
-				text: 'Largest US Cities By Population',
-				align: 'center',
-				margin: 20,
-				offsetY: 20,
-				style: {
-					fontSize: '25px',
-					color: '#263238'
-				},
-			}
+	        plotOptions: {
+		      	bar: {
+		      		horizontal: false
+		      	}
+		    },
+		      fill: {
+		      	colors: ['#f44336', '#f21234']
+		      },
+		      title: {
+		      	text: '',
+		      	align: 'center',
+		      	margin: 20,
+		      	offsetY: 20,
+		      	style: {
+		      		fontSize: '25px',
+		      		color: '#263238'
+		      	},
+		      }
 	      },
 	      series: [
 	        {
-	          name: "series-1",
-	          data: [30, 40, 45, 50, 49, 60, 70, 91],
-	        },
-	        {
-	          name: "series-2",
-	          data: [30, 100, 432, 350, 49, 60, 70, 91]
+	          name: "series",
+	          data: [],
 	        }
 	      ]
 	    };
 	}	
+
+	componentWillMount() {
+			fetch('https://www.ncdc.noaa.gov/cag/city/time-series/USW00023234-tavg-12-12-1944-2019.json?base_prd=true&begbaseyear=1948&endbaseyear=2000&fbclid=IwAR1UgsI-Dgf_8MuTRDAFe9PO7-0QRTxkkVi3iJMmOHZVi0-6y9RwqvRs15k')
+          		.then(res => res.json())
+            	.then(response => {
+            		// console.log(this.state.options.title.text);
+            		console.log(response);
+            		let dat = [];
+            		let cat = [];
+            		let seriesName = response.description.base_period;
+            		let newSeries = [{ name: seriesName, data: dat }];
+            		
+            		for (var key in response.data) {
+            			// console.log(data.data[key]);
+					    if (response.data.hasOwnProperty(key)) {
+					    	cat.push(key);
+					        dat.push(response.data[key].value);
+					    }
+					}
+					console.log(dat);
+					console.log(cat);
+            		this.setState({
+            			options: {
+            				...this.state.options,
+            				title: {
+            					...this.state.options.title,
+            					text: response.description.title
+            				}
+            		}});
+            		this.setState({
+            			options: {
+            				...this.state.options,
+            				xaxis: {
+            					...this.state.xaxis,
+            					categories: cat
+            				}
+            			}
+            		});
+            		// console.log(newSeries);
+            		this.setState({
+            			series: newSeries
+
+            		});
+					
+            	})
+            	.catch(error => console.error('Error: ', error));  
+		}
 
 	render() {
 		return (
