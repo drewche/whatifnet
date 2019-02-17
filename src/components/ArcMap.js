@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import Particles from 'react-particles-js';
 import { loadModules } from 'esri-loader';
 import { loadCss } from 'esri-loader';
 import '../resources/ArcMap.css';
@@ -38,8 +39,9 @@ class Map extends Component {
           autoSelect: true,
           popupEnabled: false,
           popupTemplate: false,
-          allPlaceholder: "1234 Main Street",
+          allPlaceholder: '1234 Main Street',
         });
+
 
         //view.on("click", function(event){
          // Sets the center point of the view at a specified lon/lat
@@ -52,6 +54,18 @@ class Map extends Component {
           view.zoom = 16;
           console.log("Latitude: " + e.result.feature.geometry.latitude);
           console.log("Longitude: " + e.result.feature.geometry.longitude);
+          fetch('https://whatifnet.appspot.com/model', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              "lat": e.result.feature.geometry.latitude,
+              "long": e.result.feature.geometry.longitude
+            })
+          }).then(res => res.json())
+            .then(response => console.log(response))
+            .catch(error => console.error('Error: ', error));  
         });
 
         view.on("key-down", function(event){
@@ -115,18 +129,70 @@ class Map extends Component {
   render() {
     return (
       <div className="map-component-container">
-        <div id="inputContainer" className="input-container">
-          
+        <Particles 
+          className="particles"
+          params={{
+              "particles": {
+                  "number": {
+                      "value": 100,
+                      "density": {
+                          "enable": false
+                      }
+                  },
+                  "color": {
+                    "value": "#ff0000"
+                  },
+                  "size": {
+                      "value": 3,
+                      "random": true,
+                      "anim": {
+                          "speed": 4,
+                          "size_min": 0.3
+                      }
+                  },
+                  "line_linked": {
+                      "enable": true,
+                      "color" : "#ff0000"
+                  },
+                  "move": {
+                      "random": true,
+                      "speed": 1,
+                      "direction": "top",
+                      "out_mode": "out"
+                  }
+              },
+              "interactivity": {
+                  "events": {
+                      "onhover": {
+                          "enable": true,
+                          "mode": "bubble"
+                      },
+                      "onclick": {
+                          "enable": true,
+                          "mode": "repulse"
+                      }
+                  },
+                  "modes": {
+                      "bubble": {
+                          "distance": 250,
+                          "duration": 2,
+                          "size": 0,
+                          "opacity": 0
+                      },
+                      "repulse": {
+                          "distance": 400,
+                          "duration": 4
+                      }
+                  }
+              }
+          }} />
+        <div id="inputContainer" className="input-container"> 
           <div className="message-text">Explore climate data from over 20 years ago.</div>
-          
           <div id="searchContainer" name="search-container"></div>
-        
         </div>
-        
         <div className="map-container">
           <div id="myGIS" className="arcgis-map"></div>
         </div> 
-      
       </div>
     );
   }
