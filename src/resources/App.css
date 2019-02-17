@@ -5,6 +5,10 @@
   flex-direction: column;
 }
 
+.scrollable {
+  overflow-x: auto;
+}
+
 .App {
   text-align: center;
 }
