@@ -103,7 +103,6 @@ class LineChart extends Component {
             		// console.log(newSeries);
             		this.setState({
             			series: newSeries
-
             		});
 					
             	})

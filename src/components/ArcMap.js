@@ -200,9 +200,12 @@ class Map extends Component {
             <Button className="applyFilter" variant="flat">What if...</Button>
           </div>
         </div>
-        <div className="map-container">
-          <div id="myGIS" className="arcgis-map"></div>
-        </div> 
+        <div className="image-container">
+          <div className="map-container">
+            <div id="myGIS" className="arcgis-map"></div>
+          </div>
+          <div className="after-pic"></div>
+        </div>
       </div>
     );
   }
