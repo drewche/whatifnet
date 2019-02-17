@@ -153,7 +153,7 @@ class Map extends Component {
                   },
                   "line_linked": {
                       "enable": true,
-                      "color" : "#ff0000"
+                      "color" : "#ff8c00"
                   },
                   "move": {
                       "random": true,

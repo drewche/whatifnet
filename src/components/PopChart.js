@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../resources/PopChart.css';
 import Chart from "react-apexcharts";
+import Particles from 'react-particles-js';
 
 class PopChart extends Component {
 
@@ -12,30 +13,49 @@ class PopChart extends Component {
 	          height: 450,
 	          width: "100%",
 	          id: "basic-bar",
-	          background: '#f4f4f4',
+	          background: 'rgba(200, 200, 200, 0.2)',
 	          foreColor: '#333'
 	        },
 	        xaxis: {
-	          categories: []
+	        	type: 'category',
+	        	categories: [],
+	        	labels: {
+	        		show: true,
+	        		rotateAlways: false,
+		            hideOverlappingLabels: true,
+		            showDuplicates: false,
+		            trim: true,
+		            minHeight: undefined,
+		            maxHeight: 120,
+		            style: {
+		                colors: [],
+		                fontSize: '12px',
+		                fontFamily: 'Helvetica, Arial, sans-serif',
+		                cssClass: 'apexcharts-xaxis-label',
+		            },
+	        	}
 	        },
 	        plotOptions: {
 		      	bar: {
 		      		horizontal: false
 		      	}
 		    },
+		     dataLabels: {
+	      		enabled: false
+	      	},
 		      fill: {
 		      	colors: ['#f44336', '#f21234']
 		      },
 		      title: {
-		      	text: '',
-		      	align: 'center',
-		      	margin: 20,
-		      	offsetY: 20,
-		      	style: {
-		      		fontSize: '25px',
-		      		color: '#263238'
-		      	},
-		      }
+				text: '',
+				align: 'center',
+				margin: 20,
+				offsetY: 20,
+				style: {
+					fontSize: '25px',
+					color: '#FFFFFF'
+				},
+			  }
 	      },
 	      series: [
 	        {
@@ -45,37 +65,25 @@ class PopChart extends Component {
 	      ]
 	    };
 	}	
-		onClick = () => {
-			this.setState({
-				options: {
-					...this.state.options,
-					plotOptions: {
-						...this.state.options.plotOptions,
-						bar: {
-							...this.state.options.plotOptions.bar,
-							horizontal: !this.state.options.plotOptions.bar.horizontal
-						}
-					}
-				}
-			})
-		}
 
 		componentWillMount() {
-			fetch('https://www.ncdc.noaa.gov/cag/city/time-series/USW00023234-tavg-12-12-1944-2019.json?base_prd=true&begbaseyear=1948&endbaseyear=2000&fbclid=IwAR1UgsI-Dgf_8MuTRDAFe9PO7-0QRTxkkVi3iJMmOHZVi0-6y9RwqvRs15k')
+			fetch('https://www.ncdc.noaa.gov/extremes/cei/we/cei/01-12/data.json?fbclid=IwAR3VXZWo3Urcu23VppiHIfiJ9Xk_aUJOrpg0QGdPidcv4ZmvBbm7gRbwQ74')
           		.then(res => res.json())
             	.then(response => {
             		// console.log(this.state.options.title.text);
             		console.log(response);
+            		console.log(response.actualPercent);
+            		console.log(response.description);
             		let dat = [];
             		let cat = [];
             		let seriesName = response.description.base_period;
             		let newSeries = [{ name: seriesName, data: dat }];
             		
-            		for (var key in response.data) {
+            		for (var key in response.actualPercent) {
             			// console.log(data.data[key]);
-					    if (response.data.hasOwnProperty(key)) {
+					    if (response.actualPercent.hasOwnProperty(key)) {
 					    	cat.push(key);
-					        dat.push(response.data[key].value);
+					        dat.push(response.actualPercent[key]);
 					    }
 					}
 					console.log(dat);
@@ -110,6 +118,63 @@ class PopChart extends Component {
 	render() {
 		return (
 			<div className="pop-graph-component-container">
+				<Particles 
+					className="particles"
+					params={{
+					    "particles": {
+					        "number": {
+					            "value": 100,
+					            "density": {
+					                "enable": false
+					            }
+					        },
+					        "color": {
+					        	"value": "#ff0000"
+					        },
+					        "size": {
+					            "value": 3,
+					            "random": true,
+					            "anim": {
+					                "speed": 4,
+					                "size_min": 0.3
+					            }
+					        },
+					        "line_linked": {
+					            "enable": true,
+					            "color" : "#ff8c00"
+					        },
+					        "move": {
+					            "random": true,
+					            "speed": 1,
+					            "direction": "top",
+					            "out_mode": "out"
+					        }
+					    },
+					    "interactivity": {
+					        "events": {
+					            "onhover": {
+					                "enable": true,
+					                "mode": "bubble"
+					            },
+					            "onclick": {
+					                "enable": true,
+					                "mode": "repulse"
+					            }
+					        },
+					        "modes": {
+					            "bubble": {
+					                "distance": 250,
+					                "duration": 2,
+					                "size": 0,
+					                "opacity": 0
+					            },
+					            "repulse": {
+					                "distance": 400,
+					                "duration": 4
+					            }
+					        }
+					    }
+					}} />
 				<div id="chart">
 					
 					<Chart
@@ -120,7 +185,6 @@ class PopChart extends Component {
 		              width="100%"
 		              height="450"
 		            />
-		            <button onClick={this.onClick}>Toggle</button>
 	
 				</div>
 			</div>

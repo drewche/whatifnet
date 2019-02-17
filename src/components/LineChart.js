@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import '../resources/LineChart.css';
 import Chart from "react-apexcharts";
+import Particles from 'react-particles-js';
 
 class LineChart extends Component {
 
@@ -12,7 +13,7 @@ class LineChart extends Component {
 	          height: 450,
 	          width: "100%",
 	          id: "basic-bar",
-	          background: '#f4f4f4',
+	          background: 'rgba(200, 200, 200, 0.2)',
 	          foreColor: '#333'
 	        },
 	        xaxis: {
@@ -23,26 +24,41 @@ class LineChart extends Component {
 		      		horizontal: false
 		      	}
 		    },
-		      fill: {
-		      	colors: ['#f44336', '#f21234']
-		      },
-		      title: {
-		      	text: '',
-		      	align: 'center',
-		      	margin: 20,
-		      	offsetY: 20,
-		      	style: {
-		      		fontSize: '25px',
-		      		color: '#263238'
-		      	},
-		      }
+		    dataLabels: {
+	      		enabled: false
+	      	},
+			fill: {
+				colors: ['#FFFFFF', 'red']
+			},
+			title: {
+				text: '',
+				align: 'center',
+				margin: 20,
+				offsetY: 20,
+				style: {
+					fontSize: '25px',
+					color: '#FFFFFF'
+				},
+			}
 	      },
 	      series: [
 	        {
 	          name: "series",
 	          data: [],
 	        }
-	      ]
+	      ],
+	      subtitle: {
+		    text: "Hello",
+		    align: 'left',
+		    margin: 10,
+		    offsetX: 0,
+		    offsetY: 0,
+		    floating: false,
+		    style: {
+		      fontSize: '14px',
+		      color: '#9699a2'
+		    },
+		}
 	    };
 	}	
 
@@ -51,7 +67,7 @@ class LineChart extends Component {
           		.then(res => res.json())
             	.then(response => {
             		// console.log(this.state.options.title.text);
-            		console.log(response);
+            		//console.log(response);
             		let dat = [];
             		let cat = [];
             		let seriesName = response.description.base_period;
@@ -64,8 +80,8 @@ class LineChart extends Component {
 					        dat.push(response.data[key].value);
 					    }
 					}
-					console.log(dat);
-					console.log(cat);
+					//console.log(dat);
+					//console.log(cat);
             		this.setState({
             			options: {
             				...this.state.options,
@@ -96,12 +112,70 @@ class LineChart extends Component {
 	render() {
 		return (
 			<div className="line-graph-component-container">
+				<Particles 
+					className="particles"
+					params={{
+					    "particles": {
+					        "number": {
+					            "value": 100,
+					            "density": {
+					                "enable": false
+					            }
+					        },
+					        "color": {
+					        	"value": "#ff0000"
+					        },
+					        "size": {
+					            "value": 3,
+					            "random": true,
+					            "anim": {
+					                "speed": 4,
+					                "size_min": 0.3
+					            }
+					        },
+					        "line_linked": {
+					            "enable": true,
+					            "color" : "#ff8c00"
+					        },
+					        "move": {
+					            "random": true,
+					            "speed": 1,
+					            "direction": "top",
+					            "out_mode": "out"
+					        }
+					    },
+					    "interactivity": {
+					        "events": {
+					            "onhover": {
+					                "enable": true,
+					                "mode": "bubble"
+					            },
+					            "onclick": {
+					                "enable": true,
+					                "mode": "repulse"
+					            }
+					        },
+					        "modes": {
+					            "bubble": {
+					                "distance": 250,
+					                "duration": 2,
+					                "size": 0,
+					                "opacity": 0
+					            },
+					            "repulse": {
+					                "distance": 400,
+					                "duration": 4
+					            }
+					        }
+					    }
+					}} />
 				<div id="chart">
 					
 					<Chart
 		              options={this.state.options}
 		              series={this.state.series}
 		              title={this.state.title}
+		              subtitle={this.state.subtitle}
 		              type="area"
 		              width="100%"
 		              height="450"
