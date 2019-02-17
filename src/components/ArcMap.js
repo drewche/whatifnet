@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { loadModules } from 'esri-loader';
 import { loadCss } from 'esri-loader';
 import '../resources/ArcMap.css';
@@ -11,8 +11,8 @@ class Map extends Component {
   componentDidMount() {
     loadCss('https://js.arcgis.com/4.10/esri/css/main.css');
 
-    loadModules(['esri/views/MapView', 'esri/Map'])
-      .then(([MapView, Map]) => {
+    loadModules(['esri/views/MapView', 'esri/Map', 'esri/widgets/Search'])
+      .then(([MapView, Map, Search]) => {
         
         const map = new Map({
           basemap: 'satellite'
@@ -31,6 +31,29 @@ class Map extends Component {
           }
         });
 
+        const searchWidget = new Search({
+          view: view,
+          container: 'searchContainer',
+          suggestionsEnabled: false,
+          autoSelect: true,
+          popupEnabled: false,
+          popupTemplate: false,
+          allPlaceholder: "1234 Main Street",
+        });
+
+        //view.on("click", function(event){
+         // Sets the center point of the view at a specified lon/lat
+          //view.zoom = 16;  // Sets the zoom LOD to 13
+          // Set the extent on the view
+          
+        //});
+
+        searchWidget.on("select-result", function(e){
+          view.zoom = 16;
+          console.log("Latitude: " + e.result.feature.geometry.latitude);
+          console.log("Longitude: " + e.result.feature.geometry.longitude);
+        });
+
         view.on("key-down", function(event){
           var prohibitedKeys = [ "+", "-", "Shift", "_", "=" ];
           var keyPressed = event.key;
@@ -43,9 +66,9 @@ class Map extends Component {
           event.stopPropagation();
         });
 
-        // view.on("double-click", function(event){
-        //   event.stopPropagation();
-        // });
+        view.on("double-click", function(event){
+          event.stopPropagation();
+        });
 
         view.on("double-click", ["Control"], function(event){
           event.stopPropagation();
@@ -92,20 +115,18 @@ class Map extends Component {
   render() {
     return (
       <div className="map-component-container">
-        <div className="input-container">
-          <div className="message-text">
-          </div>
-          <Form>
-            <Form.Group controlId="formGridAddress1">
-              <Form.Label className="form-text">ENTER YOUR ADDRESS OR ZIPCODE.</Form.Label>
-              <Form.Control className="form-input" placeholder="1234 Main St" />
-            </Form.Group>
-            <Button type="submit" className="execute" variant="dark">Execute</Button>
-          </Form>
+        <div id="inputContainer" className="input-container">
+          
+          <div className="message-text">Explore climate data from over 20 years ago.</div>
+          
+          <div id="searchContainer" name="search-container"></div>
+        
         </div>
+        
         <div className="map-container">
           <div id="myGIS" className="arcgis-map"></div>
         </div> 
+      
       </div>
     );
   }

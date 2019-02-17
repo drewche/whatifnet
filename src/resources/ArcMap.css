@@ -7,6 +7,7 @@
   width: 100%;
   background-image: url("./images/wildfire.jpg");
   background-size: cover;
+  padding: 5%;
 }
 
 .map-container {
@@ -27,26 +28,26 @@
 	width: 400px;
 }
 
-.form-text {
-	font-size: 30px;
-	font-family: 'Inconsolata', monospace;
-	color: white;
-}
-
-.form-input {
-	font-size: 30px;
-	font-family: 'Inconsolata', monospace;
-	color: white;
-}
-
-.execute {
-	margin-bottom: 5%;
+.input-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	height: 50%;
 	width: 100%;
+}
+
+.message-text {
 	font-size: 30px;
+	font-family: 'Inconsolata', monospace;
 	color: white;
 }
 
-.execute:hover {
-	cursor: pointer;
-	color: red;
+.search-container {
+	display: flex;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	color: blue;
 }
