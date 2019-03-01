@@ -136,7 +136,7 @@ class PopChart extends Component {
 					            "random": true,
 					            "anim": {
 					                "speed": 4,
-					                "size_min": 0.3
+					                "size_min": 0.4
 					            }
 					        },
 					        "line_linked": {
