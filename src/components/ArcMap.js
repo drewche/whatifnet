@@ -64,7 +64,7 @@ class Map extends Component {
           view.center = [long, lat];
           console.log("Latitude: " + lat);
           console.log("Longitude: " + long);
-          fetch('http://35.235.84.213:3000/model', {
+          fetch('http://35.236.7.193:3000/model', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
